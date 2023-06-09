@@ -8,6 +8,7 @@
                 <h5 class="modal-title" id="addStudentModalLabel">Ajouter un élève</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            
             <div class="modal-body">
             <form action="http://localhost:8000/Classe/inscription/" method="post" class="form-container" >
                     <div class="row mb-3">
@@ -65,6 +66,7 @@
                             <button type="submit" class="btn btn-primary" id="inscription">Ajouter</button>
                         </div>
                     </div>
+                    
                 </form>
             </div>
         </div>
@@ -78,9 +80,12 @@
                 <div class="text-center mb-4 mt-4">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStudentModal">Ajouter un élève</button>
                 </div>
+                <div class="text-center mb-4 mt-4">
+                    <a href="/Coefficient/Coefficient/<?php echo $mar?>"><button class="btn btn-primary" >Coefficient/pond</button></a>
+                </div>
                 <table class="table table-bordered table-hover mt-3">
                     <caption class="text-primary text-uppercase text-center fs-1 fw-bold caption-top">
-                        <strong>Liste des élèves</strong>
+                        <strong>Liste des élèves de la <?php echo $maClasse ?></strong>
                     </caption>
                     <thead class="table-dark text-center">
                         <tr>

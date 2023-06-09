@@ -28,6 +28,9 @@
 <body>
 
     <div class="container">
+        <a href="/niveau/">
+            <button class= "rounded-2 bg-success text-light" >Retour</button>
+        </a>
         <h1 class="text-center mb-4">Ajouter un élève</h1>
         <div class="row justify-content-center">
             <div class="col-md-4 text-center">
@@ -115,7 +118,8 @@
         </div>
     </div>
 
-    <script src="<?= '/app.js' ?>"></script>
+    <!-- <script src="<?= '/app.js' ?>"></script> -->
+    <script src="/app.js"></script>
 </body>
 
 </html>

@@ -13,6 +13,7 @@ const inscription = document.querySelector("#inscription");
 const nomClasse = document.querySelector(".nomClasse");
 const messageError = document.querySelector("#messError");
 buttonOk.setAttribute("disabled", true);
+
 Disciplineniveau.addEventListener("change", () => {
     if (Disciplineniveau.value === "choisir") {
         console.log("veuiller choisir un niveau");
@@ -66,8 +67,11 @@ ClasseNew.addEventListener("change", () => {
 
     console.log(ClasseNew.textContent);
     let tableau = document.querySelectorAll(".inputClasse");
-    console.log(tableau);
-    console.log(getclasse(tableau, ClasseNew.value));
+    // console.log(tableau);
+    // console.log(getclasse(tableau, ClasseNew.value));
+    nomClasse.removeAttribute("href");
+    nomClasse.setAttribute("href", "/coefficient/coefficient/"+ClasseNew.value);
+
     nomClasse.textContent = getclasse(tableau, ClasseNew.value);
     // console.log(objet);
     fetch('http://localhost:8000/Discipline/getdisciplineClasse/', {
@@ -122,6 +126,21 @@ ClasseNew.addEventListener("change", () => {
                     input.forEach(element => {
                         element.setAttribute("checked", "true");
                     })
+                    input.forEach(element => {
+                        element.addEventListener("change", (e)=>
+                        {
+                            let child = e.target;
+                            let parent = child.parentNode;
+                            parent.classList.remove("text-danger");
+                            if(!(element.checked))
+                            {
+                               
+                                parent.classList.add("text-danger");
+
+                            }
+                        })
+                        
+                    });
 
 
                 })
@@ -189,7 +208,7 @@ newDisciplineGroup.addEventListener("change", () => {
     }
 })
 
-newdiscipline.addEventListener("change", () => {
+newdiscipline.addEventListener("input", () => {
     if (newdiscipline.value === "" || ClasseNew.value === "" || GDiscipline.value === "") {
 
         buttonOk.setAttribute("disabled", true);
@@ -236,7 +255,7 @@ buttonOk.addEventListener("click", () => {
                 .then(response => response.json())
                 .then(data => {
                     disciplinecheck.innerHTML = '';
-
+                    messageError.classList.add("d-none");
                     if(data.length === 0)
                     {
                         messageError.textContent = "Il n'y a pas de discipline disponible pour cette classe";
@@ -270,6 +289,22 @@ buttonOk.addEventListener("click", () => {
                         })
                     })
 
+                    input.forEach(element => {
+                        element.addEventListener("change", (e)=>
+                        {
+                            let child = e.target;
+                            let parent = child.parentNode;
+                            parent.classList.remove("text-danger");
+                            if(!(element.checked))
+                            {
+                               
+                                parent.classList.add("text-danger");
+
+                            }
+                        })
+                        
+                    });
+
 
                 })
                 .catch(error => {
@@ -290,7 +325,7 @@ inscription.addEventListener("click", () => {
     });
     console.log(tab);
     if (tab.length === 0) {
-        console.log("Il vous n'avez choisis aucune discipline à supprimer pour cette classe")
+        console.log("Il vous n'avez choisis aucune discipline à supprimer pour cette classe, merci")
     }
     else {
         let objet = {
@@ -336,6 +371,21 @@ inscription.addEventListener("click", () => {
                                 }
                             })
                         })
+                        input.forEach(element => {
+                            element.addEventListener("change", (e)=>
+                            {
+                                let child = e.target;
+                                let parent = child.parentNode;
+                                parent.classList.remove("text-danger");
+                                if(!(element.checked))
+                                {
+                                   
+                                    parent.classList.add("text-danger");
+    
+                                }
+                            })
+                            
+                        });
 
 
                     })

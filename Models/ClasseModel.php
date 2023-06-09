@@ -116,4 +116,22 @@ public function getIdbyNamejs($name, $anne)
     $requete->execute();
     return $requete->fetchAll();
 }
+public function getLibelleById($id)
+{
+    $requete = "SELECT libelle_classe from classe where id_classe = :id";
+    $requete = $this->bd->prepare($requete);
+    $requete->bindParam(":id", $id);
+    $requete->execute();
+    return $requete->fetchAll();
+    
+}
+public function getLibelleNiveauByID($id)
+{
+    $requete = "SELECT  libelleGN from GroupeNiveau where id_GNiveau = :id";
+    $requete = $this->bd->prepare($requete);
+    $requete->bindParam(":id", $id);
+    $requete->execute();
+    return $requete->fetchAll();
+    
+}
 }

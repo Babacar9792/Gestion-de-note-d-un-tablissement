@@ -41,4 +41,6 @@
     // $substring = substr($chaine, 0, 5);
     
     // echo $substring; // Affiche "Hello"
+
+    // require "../Views/coefficient.html.php";
     

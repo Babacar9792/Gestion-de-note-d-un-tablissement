@@ -11,6 +11,7 @@ class ClasseController
     public function classe($id)
     {
         $_SESSION["currentLevel"] = $id;
+        $monNiveau = $this->model-> getLibelleNiveauByID($id)[0]["libelleGN"];
         var_dump($_SESSION["currentLevel"]);
         $currentYear = $this->model->SelectYear(1);
         $years = $this->model->SelectYear(0);
@@ -38,9 +39,11 @@ class ClasseController
     {
 
         $_SESSION["currentClasse"] = $id;
+        $maClasse = $this->model->getLibelleById($id)[0]["libelle_classe"];
         $currentYear = $this->model->SelectYear(1);
         $years = $this->model->SelectYear(0);
         $student = $this->model->allStudent($id);
+        $mar = $id;
         require "../Views/Eleve.php";
     }
     public function inscription()

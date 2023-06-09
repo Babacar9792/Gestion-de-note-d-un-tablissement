@@ -18,7 +18,7 @@
                     <input type="text" name="newClasse" class="form-control" placeholder="Entrez la nouvelle classe" required>
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </form>
-                <h1 class="text-primary text-uppercase text-center fw-bold">Liste des Classes</h1>
+                <h1 class="text-primary text-uppercase text-center fw-bold"><span class="text-success"> <?php echo $monNiveau; ?> </span>: Liste des Classes</h1>
                 <ul class="list-group pd-2">
                     <?php foreach($classes as $value):?>
                     <li class="list-group-item fs-4 d-flex justify-content-between">

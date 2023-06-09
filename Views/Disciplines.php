@@ -43,7 +43,7 @@
                                 <option value="choisir">Choisir un niveau</option>
                             <?php foreach ($level as $value) : ?>
                                    <option value="<?php echo $value['id_GNiveau'] ?>">
-                                       <?php echo $value['libelleGN'] ?>
+                                     <?php echo $value['libelleGN'] ?>
                                    </option>
                                <?php endforeach ?>
 
@@ -86,7 +86,7 @@
         </div>
         <hr>
         <h6 class="text-danger">Decocher une discipline pour la supprimer de la classe</h6>
-        <h5>Les disciplines de la classe de <span class="nomClasse text-success"></span></h5>
+        <h5>Les disciplines de la classe de <a href= "/coefficient/coefficient/" class="nomClasse text-success"></a></h5>
         <span class="text-danger position-absolute top-85 start-50 translate-middle" id="messError"></span>
         <div class="col mb-4 d-flex justify-content-around  disciplinecheck flex-wrap" >
             
@@ -136,7 +136,8 @@
           });
         });
     </script>
-     <script src="<?= '/app2.js' ?>"></script>
+    <script src="<?= '/app2.js' ?>"></script>
 </body>
 
 </html>
+

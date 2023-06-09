@@ -62,4 +62,14 @@ class NiveauModel
         echo "wou";
         
     }
+
+    public function getLibelleByID($id)
+{
+    $requete = "SELECT  libelleGN from GroupeNiveau where id_GNiveau = :id";
+    $requete = $this->bd->prepare($requete);
+    $requete->bindParam(":id", $id);
+    $requete->execute();
+    return $requete->fetchAll();
+    
+}
 }

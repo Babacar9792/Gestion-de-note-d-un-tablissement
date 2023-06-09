@@ -32,7 +32,7 @@ class NiveauController
     public function classe($id)
     {
         $_SESSION["currentLevel"] = $id;
-        // var_dump($_SESSION["currentLevel"]);
+        $monNiveau = $this->model->getLibelleByID($id)[0]["libelleGN"];
         $currentYear = $this->model->SelectYear(1);
         $years = $this->model->SelectYear(0);
         $classes = $this->model->allclasse($id);

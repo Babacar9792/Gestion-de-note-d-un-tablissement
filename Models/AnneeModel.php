@@ -5,14 +5,22 @@ class AnneeModel
     private $pdo;
 
 
-    private PDO $bd;
+    protected   PDO $bd;
 
     public function __construct()
     {
         $this->pdo = new ConnexionBd();
         $this->bd = $this->pdo->connexion();
     }
-
+public function selectAlldiscipline($id_classe)
+    {
+       
+        $requete = "SELECT d.libelle_discipline, d.code_discipline  , d.id_discipline FROM discipline AS d INNER JOIN discipline_groupeDiscipline AS dg ON d.id_discipline = dg.id_discipline_association INNER JOIN classe AS c ON dg.id_classe_association = c.id_classe WHERE c.id_classe = :id_classe ";
+        $requete = $this->bd->prepare($requete);
+        $requete->bindParam(":id_classe", $id_classe);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
     public function SelectYear($statut)
     {
         $requete = "SELECT * FROM annee where statut = :statut and archive = 0";
@@ -44,5 +52,15 @@ class AnneeModel
         $requete = $this->bd->prepare($requete);
         $requete->bindParam(":newd", $id);
         $requete->execute();
+    }
+
+    public function getLibelleById($id)
+    {
+        $requete = "SELECT libelle_classe from classe where id_classe = :id";
+        $requete = $this->bd->prepare($requete);
+        $requete->bindParam(":id", $id);
+        $requete->execute();
+        return $requete->fetchAll();
+        
     }
 }

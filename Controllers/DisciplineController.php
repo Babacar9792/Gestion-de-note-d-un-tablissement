@@ -26,7 +26,7 @@ class DisciplineController
         $classe = $this->model->allclasse($id);
         header('Content-Type: application/json');
         echo json_encode($classe);
-        // file_put_contents("../Public/fichier.json", json_encode($classe));
+        file_put_contents("../Public/fichier.json", json_encode($classe));
         // var_dump($data);
     }
 
@@ -52,8 +52,6 @@ class DisciplineController
         $Gdiscilpline = $this->model->AllGroupeDiscipline();
         file_put_contents("../Public/fichier.json", json_encode($Gdiscilpline));
         header('Content-Type: application/json');
-    
-        
         $this->gestion();
     }
 

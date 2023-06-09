@@ -1,4 +1,4 @@
-// alert("erty");
+alert("erty");
 const prenom = document.querySelector("#prenom");
 const nom = document.querySelector("#nom");
 const numero = document.querySelector("#numero");
@@ -14,6 +14,7 @@ const inputHidden = document.querySelector("#inputHidden");
 const typeEleve = document.querySelector("#typeEleve");
 
 //----------------------------------------------------------------------------------const
+
 
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
@@ -204,10 +205,10 @@ niveau.addEventListener("change", () => {
                 })
                 .catch( error => {
                     console.error("error pas de classe", error);
-               }) // Affiche les données récupérées dans la console
-        // Faites ce que vous souhaitez avec les données, par exemple :
-        // Mettez à jour l'affichage des classes sur votre page HTML
+               }) 
+    
     });
   
 
 });
+
