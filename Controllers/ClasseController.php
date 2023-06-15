@@ -11,7 +11,7 @@ class ClasseController
     public function classe($id)
     {
         $_SESSION["currentLevel"] = $id;
-        $monNiveau = $this->model-> getLibelleNiveauByID($id)[0]["libelleGN"];
+        $monNiveau = $this->model->getLibelleNiveauByID($id)[0]["libelleGN"];
         var_dump($_SESSION["currentLevel"]);
         $currentYear = $this->model->SelectYear(1);
         $years = $this->model->SelectYear(0);
@@ -44,6 +44,8 @@ class ClasseController
         $years = $this->model->SelectYear(0);
         $student = $this->model->allStudent($id);
         $mar = $id;
+        $level = $_SESSION["currentLevel"];
+        $discipline = $this->model->selectAlldiscipline($id);
         require "../Views/Eleve.php";
     }
     public function inscription()
@@ -81,6 +83,13 @@ class ClasseController
         $idNiveau = $this->model->getIdbyNamejs($name, $id_annee_inscription);
         $id = $idNiveau[0]["id_GNiveau"];
         $classe = $this->model->allclasse($id);
-       echo  json_encode($classe);
+        echo  json_encode($classe);
+    }
+    public function getNoteDiscipline()
+    {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $note = $this->model->getNote($data["colonne"], $data["id"]);
+        header('Content-Type: application/json');
+        echo json_encode($note);
     }
 }

@@ -27,7 +27,7 @@ Disciplineniveau.addEventListener("change", () => {
             Disciplineniveau: Disciplineniveau.value
         };
         // console.log(objet);
-        fetch('http://localhost:8000/Discipline/getClasse/', {
+        fetch('/Discipline/getClasse/', {
             method: 'POST',
             body: JSON.stringify(objet),
             headers: {
@@ -61,6 +61,7 @@ Disciplineniveau.addEventListener("change", () => {
 
 
 ClasseNew.addEventListener("change", () => {
+    disciplinecheck.innerHTML = '';
     let objet = {
         classe: ClasseNew.value
     };

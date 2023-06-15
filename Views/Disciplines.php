@@ -51,10 +51,7 @@
                         </div>
                         <div class="col">
                             <label for="">Classe:</label>
-                            <select class="form-select" id="ClasseNew" name="id_classe">
-
-                        
-                            </select>
+                            <select class="form-select" id="ClasseNew" name="id_classe"> </select>
                         </div>
                     </div>
                     <div class="row mb-4 d-flex justify-content-between">

@@ -10,7 +10,6 @@ class DisciplineController
     }
     public function gestion()
     {
-       
         $id = $this->model->getCurrentYear()[0]["id_annee"];
         $level = $this->model->AllGN($id);
         $classes = $this->model->allclasse(3);
@@ -95,14 +94,19 @@ class DisciplineController
             $this->model->insertDiscipline($name, $code, $id_groupe);
         }
         $libelle = $this->model->getDisciplineByname($name)[0]["id_discipline"];
-       
-        $this->model->insertDisciplineGroupe($libelle, $id_classe);
+       if (count($this->model->getDisciplineByClasseAndDisci($id_classe, $libelle)) == 0)
+       {
+
+           $this->model->insertDisciplineGroupe($libelle, $id_classe);
+       }
+
         $discipline = $this->model->selectAlldiscipline($id_classe);
     
         file_put_contents("../Public/fichier.json", json_encode($discipline));
         var_dump($data);
 
     }
+
     public function delete()
     {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -117,5 +121,6 @@ class DisciplineController
         file_put_contents("../Public/fichier.json", json_encode($discipline));
         
     }
+   
 }
 

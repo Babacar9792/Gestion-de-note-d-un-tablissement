@@ -31,7 +31,7 @@ class DisciplineModel
         $requete->execute();
         return $requete->fetchAll();
     }
-
+    
     public function getCurrentYear()
     {
         $requete = "SELECT * FROM annee where statut = 1";
@@ -105,4 +105,18 @@ class DisciplineModel
         $requete->execute();
         return $requete->fetchAll();
     }
+    public function getDisciplineByClasseAndDisci($id_classe, $id_discipline)
+    {
+        $requete = "SELECT * FROM discipline_groupeDiscipline where id_discipline_association = :idDici and id_classe_association = :id_classe";
+        $requete = $this->bd->prepare($requete);
+        $requete->bindParam(":id_classe", $id_classe);
+        $requete->bindParam(":idDici", $id_discipline);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+//    public function gerereCode($discipline)
+//    {
+
+//    }
 }
+

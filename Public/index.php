@@ -44,3 +44,11 @@
 
     // require "../Views/coefficient.html.php";
     
+
+    // require "../Models/ClasseModel.php";
+    // $classe = new ClasseModel();
+    // var_dump($classe->getNote("noteExamen", 8));
+
+    // require "../Models/ClasseModel.php";
+    // $classe = new ClasseModel();
+    // var_dump($classe->nombreLigne());
