@@ -51,10 +51,10 @@ Disciplineniveau.addEventListener("change", () => {
                             ClasseNew.appendChild(option);
                         })
                     // })
-                    .catch(error => {
-                        console.error("error pas de classe", error);
-                    })
-            })
+                })
+                .catch(error => {
+                    console.error("error pas de classe", error);
+                })
 
     }
 })

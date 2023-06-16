@@ -11,30 +11,47 @@ const inputNote = document.querySelectorAll(".inputNote");
 const autoloader = document.querySelector(".autoloader");
 const btnUpdate = document.querySelector(".btn-update");
 const maximale = document.querySelector(".maximale");
+let valeurMAximale = 1;
+let error = 0;
+btnUpdate.setAttribute("disabled", "true");
 inputNote.forEach(d => {
     d.addEventListener("change",()=>
     {
         d.classList.add("changed");
+
+        if(d.value > valeurMAximale) 
+        {
+            
+            d.classList.add("bg-danger");
+            btnUpdate.setAttribute("disabled", "true");
+            error++;
+        } 
+        else 
+        {
+            d.classList.remove("bg-danger");
+            btnUpdate.removeAttribute("disabled");
+            
+        }
     })
 });
 
 
 
 inputNote.forEach(d => {
+    let valeurmax = noteMaximale;
     d.addEventListener("input",()=>
     {
-        if(d.value < maximale.value*0.5)
+        d.classList?.remove("bg-danger");
+        if(d.value > valeurMAximale) 
         {
-
-            d.classList.remove("text-success");    
-            d.classList.add("text-danger");
-        }
-        else
+            
+            d.classList.add("bg-danger");
+        } 
+        else 
         {
-            d.classList.remove("text-danger");
-            d.classList.add("text-success");
+            d.classList.remove("bg-danger");
+            
         }
-        console.log(maximale.value);
     })
 });
 
@@ -43,12 +60,18 @@ inputNote.forEach(d => {
 btnUpdate.addEventListener("click", ()=>
 {
 
+    if(error!=0)
+    {
+        alert("Aucune note ne doit dépasser "+valeurMAximale);
+    }
+    else{
+
     let changed = document.querySelectorAll(".changed");
-    console.log(changed);
+    console.log(error);
     let tab = [];
     changed.forEach(d => {
        
-        console.log(d.getAttribute("form-data"));
+        //console.log(d.getAttribute("form-data"));
         let objet = {
             idEleve : d.getAttribute("form-data"), 
             note : d.value, 
@@ -56,31 +79,36 @@ btnUpdate.addEventListener("click", ()=>
             discipline : discipline.value
         }
         tab.push(objet);
+
     });
-    console.log(tab)
-    // console.log(inputNote);
+    // fetch("/classe/addNote", {
+    //     method : 'POST', 
+    //     headers : {
+    //         'Content-Type' : 'application/json'
+    //     }, 
+    //     body : JSON.stringify(tab)
+    // })
     autoloader.classList.remove("d-none");
     autoloader.classList.add("d-block");
     setTimeout(() => {
         autoloader.classList.remove("d-block");
         autoloader.classList.add("d-none");
     }, 3000);
+}
 })
 noteChoisie.addEventListener("change", () => {
     inputEmpty(inputNote);
     if (noteChoisie.value != "" && discipline.value != "") {
-        console.log(noteChoisie.value);
-        console.log(discipline.value);
         let objet = {
             id: discipline.value,
             colonne: noteChoisie.value
         }
-       
         getNoteMaximale(objet);
         note.forEach(element => {
             element.classList.remove("d-none");
 
         });
+
     }
     else {
         note.forEach(element => {
@@ -88,6 +116,7 @@ noteChoisie.addEventListener("change", () => {
 
         });
     }
+
 })
 
 discipline.addEventListener("change", () => {
@@ -96,13 +125,14 @@ discipline.addEventListener("change", () => {
         note.forEach(element => {
             element.classList.remove("d-none");
         });
-        console.log(noteChoisie.value);
-        console.log(discipline.value);
+        // console.log(noteChoisie.value);
+        // console.log(discipline.value);
         let objet = {
             id: discipline.value,
             colonne: noteChoisie.value
         };
         getNoteMaximale(objet);
+       
     }
     else {
         note.forEach(element => {
@@ -127,14 +157,15 @@ function getNoteMaximale(objet)
             .then(data => {
                 for (const key in data[0]) {
                     choix += key
-                    console.log(key, data[0][key]);
+                    // console.log(key, data[0][key]);
                   }
-                    console.log(choix);
+                    // console.log(choix);
                     maximale.value = data[0][choix];
                     noteMaximale.forEach(d => {
                     d.innerText = data[0][choix]
-
+                    
                 });
+                valeurMAximale = data[0][choix];
                 // console.log(data[0]);
             });
 
@@ -144,6 +175,14 @@ function getNoteMaximale(objet)
 function inputEmpty(tab)
 {
     tab.forEach(d => {
-        d.valyue = "";
+        d.value = "";
+    });
+}
+
+
+function blockinput(tab)
+{
+    tab.forEach(d => {
+        d.setAttribute("disabled", "true");
     });
 }

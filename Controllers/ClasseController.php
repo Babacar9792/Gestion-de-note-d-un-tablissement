@@ -46,6 +46,7 @@ class ClasseController
         $mar = $id;
         $level = $_SESSION["currentLevel"];
         $discipline = $this->model->selectAlldiscipline($id);
+        $effectif  = $this->model->CountClasse($id);
         require "../Views/Eleve.php";
     }
     public function inscription()
@@ -62,7 +63,6 @@ class ClasseController
                 $statut = $_POST["statut"];
                 $id_classe_inscription = $_SESSION["currentClasse"];
                 $id_annee_inscription = $this->model->SelectYear(1)[0]["id_annee"];
-
                 $this->model->registerstudent($prenom, $nom, $numero, $dateNaissance, $lieuNaissance, $sexe, $statut, $id_classe_inscription, $id_annee_inscription);
                 $this->liste($id_classe_inscription);
             } catch (Exception $th) {
@@ -92,4 +92,38 @@ class ClasseController
         header('Content-Type: application/json');
         echo json_encode($note);
     }
+    public function addNote()
+    {
+        $data =  file_get_contents('php://input');
+        $donnee = json_decode($data);
+        $id_niveau = $_SESSION["currentLevel"];
+        $id_semestre = 1;
+        $id_SemestreNiveau = $this->model->getIdSemestreNiveau($id_semestre, $id_niveau)[0]["idSemestreNiveau"];
+        // echo json_encode($donnee);
+        $table = [];
+        // echo json_encode($data);
+        foreach ($donnee as $value) {
+            $this->insertOrUpdateNote($value->note, $value->idEleve, $id_SemestreNiveau, $value->discipline, $value->type);
+            // array_push($table, ["discipline"=>$value->discipline, "note"=>$value->note,"idEleve"=>$value->idEleve, "type"=>$value->type]);
+        }
+        // echo json_encode($table);
+    }
+    public function insertOrUpdateNote($note, $idEleve, $id_semestre, $id_discipline, $type)
+    {
+        $tab = $this->model->searchNote($idEleve, $id_semestre, $id_discipline, $type);
+      if(count($tab) === 0)
+      {
+        $this->model->insertNote($note, $idEleve, $id_semestre, $id_discipline, $type);
+      }
+      else{
+        $this->model->uptdateNote($tab[0]["id_Note_"], $note);
+      }
+       
+    }
+    // public function insertOrUpdateNote($idEleve, $id_semestre, $id_discipline, $type)
+    // {
+    //     $tab = $this->model->searchNote($idEleve, $id_semestre, $id_discipline, $type);
+    //     var_dump(count($tab));
+       
+    // }
 }

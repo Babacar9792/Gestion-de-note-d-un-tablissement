@@ -16,7 +16,7 @@ console.log(input);
         d.addEventListener("input",()=>
         {
             notletter(d.value, d);
-            if(d.value<0)
+            if( d.value<=0 )
             {
                 mettreAjour.setAttribute("disabled", "true");
                 d.classList.add("text-danger");
@@ -55,12 +55,8 @@ console.log(input);
         let error = 0;
 
         tab.forEach(d => {
-            if(d.colonne === "noteExamen" && d.note <10 )
-            {
-                error++;
-
-            }
-        });
+            if(d.colonne === "noteExamen" && d.note <10 ){ error++;}
+         });
         if(error === 0)
         {
             fetch("/Coefficient/update/", {
@@ -70,13 +66,11 @@ console.log(input);
                 },
                 body : JSON.stringify(tab)
             })
-
         }
         else 
         {
             alert("Aucune note d'examen ne doit etre inférieur à 10")
         }
-       
     })
 
 // mettreAjour.addEventListener("click", async () => {

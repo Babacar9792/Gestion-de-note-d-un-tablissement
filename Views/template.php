@@ -35,19 +35,19 @@
                     </li>
                     <li class="nav-item">
                         <a href="http://localhost:8000/Inscription/" class="nav-link active" title="Cliquer pour ajouter un éléve">
-                            <i class="bi-house-fill"></i>
+                        <i class="bi bi-person-add"></i>
                            Ajouter un éléve
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="http://localhost:8000/Discipline/gestion/" class="nav-link active" title="Afficher l'interface des disciplines">
-                            <i class="bi-house-fill"></i>
+                        <i class="bi bi-book"></i>
                            Discipline
                         </a>
                     </li>
                 <li class="nav-item">
                         <a href="http://localhost:8000/Annee/allYear/" class="nav-link active" title="Afficher l'interface des années scolaires">
-                            <i class="bi-house-fill"></i>
+                        <i class="bi bi-calendar-check"></i>
                             Annee scolaire
                         </a>
                     </li>

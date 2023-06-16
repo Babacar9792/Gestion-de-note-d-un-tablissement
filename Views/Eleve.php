@@ -77,13 +77,13 @@
     <div class="container mt-3  d-flex justify-content-center  mw-100">
         <div class="row justify-content-center mt-4 w-75 d-flex">
             <div class="col-sm-10 mt-3 ">
-                <div class="text-center mb-4 mt-4 text-success">
+                <div class="text-center mb-4 mt-4 text-success d-flex justify-content-end">
                     <!-- <i class="bg-primary" ></i> -->
                     <i class="bi bi-file-plus" data-bs-toggle="modal" data-bs-target="#addStudentModal">Ajouter un élève</i>
                 </div>
                 <div class="w-100 d-flex flex-column align-items-center justify-content-around mt-3 fs-4">
                     <div> <strong> <?php echo $maClasse ?><span>(<?php echo $currentYear[0]["libelle"]; ?>)</span> </strong> </div>
-                    <div> <strong>effectif : <?php echo $maClasse ?> </strong> </div>
+                    <div> <strong>effectif : <?php echo $effectif[0]["total"] ?> </strong> </div>
                     <div> <strong> Moyenne classe: 13 </strong> </div>
 
                 </div>
@@ -146,7 +146,7 @@
                                 <td class="text-center"><?php echo $value["prenom"]; ?></td>
                                 <td class="text-uppercase text-center"><?php echo $value["nom"]; ?></td>
                                 <td class="text-center"><?php echo $value["statutEleve"]; ?></td>
-                                <td class="d-flex noteEleve d-none"> <input type="number" class="mw-10 inputNote border" form-data = "<?php echo $value["id_inscription"]; ?>">
+                                <td class="d-flex noteEleve d-none"> <input type="number" min = "0" class="inputNote" form-data="<?php echo $value["id_inscription"]; ?>">
                                     <span>/</span>
                                     <span class="noteMaximale"></span>
                                 </td>
@@ -161,9 +161,9 @@
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Loading...
                 </button>
-                            <div>
-                                <input type="hidden" name="" class="maximale">
-                            </div>
+                <div>
+                    <input type="hidden" name="" class="maximale">
+                </div>
 
             </div>
         </div>

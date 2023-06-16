@@ -52,3 +52,7 @@
     // require "../Models/ClasseModel.php";
     // $classe = new ClasseModel();
     // var_dump($classe->nombreLigne());
+
+    // require "../Controllers/ClasseController.php";
+    // $classe = new ClasseController();
+    // $classe->insertOrUpdateNote(10, 6, 55, "noteressource");

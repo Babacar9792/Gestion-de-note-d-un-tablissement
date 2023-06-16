@@ -161,15 +161,54 @@ class ClasseModel
         return $requete->fetchAll();
 
     }
-    public function insertNote($note, $id_eleveInscription, $id_semestreNiveau, $id_dsciplineClasse, $typeNote)
+    public function insertNote($note, $id_eleveInscription, $id_semestreNiveau, $id_disciplineClasse, $typeNote)
     {
         $requete = "INSERT INTO note (note, id_inscription_note, id_semestreNiveau_note, id_disciplineClasse_note, typeNote) VALUES (:note, :id_inscription, :idSemestre, :id_discipline, :typeNote)";
         $requete = $this->bd->prepare($requete);
         $requete->bindParam(":note", $note);
         $requete->bindParam(":id_inscription", $id_eleveInscription);
         $requete->bindParam(":idSemestre", $id_semestreNiveau);
-        $requete->bindParam(":id_discipline", $id_dsciplineClasse);
+        $requete->bindParam(":id_discipline", $id_disciplineClasse);
         $requete->bindParam(":typeNote", $typeNote);
+        $requete->execute();
     }
-    
+    public function getIdSemestreNiveau($id_semestre, $id_niveau)
+    {
+        $requete = "SELECT * FROM semestreNiveau where  id_semestre_association = :id_semestre and id_Gniveau_association = :id_niveau";
+        $requete = $this->bd->prepare($requete);
+        $requete->bindParam(":id_semestre", $id_semestre);
+        $requete->bindParam(":id_niveau", $id_niveau);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+    public function uptdateNote($idNote, $note)
+    {
+        $requete = "UPDATE note set note = :note where id_Note_ = :idNote";
+        $requete = $this->bd->prepare($requete);
+        $requete->bindParam(":note", $note);
+        $requete->bindParam(":idNote", $idNote);
+        $requete->execute();
+    }
+    public function searchNote($idInscription, $idsemestre, $idDiscipline, $typeNote)
+    {
+        $requete = "SELECT * from note where id_inscription_note = :inscription and id_semestreNiveau_note = :idSemestre and id_disciplineClasse_note = :idDiscipline and typeNote = :typeNote";
+        $requete = $this->bd->prepare($requete);    
+        $requete->bindParam(":inscription", $idInscription);
+        $requete->bindParam(":idSemestre", $idsemestre);
+        $requete->bindParam(":idDiscipline", $idDiscipline);
+        $requete->bindParam(":typeNote", $typeNote);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+
+    public function CountClasse($idClasse)
+    {
+        $requete = "SELECT COUNT(*) AS total FROM  inscription where id_classe_inscription = :idClasse";
+        $requete = $this->bd->prepare($requete);
+        $requete->bindParam(":idClasse", $idClasse);
+        $requete->execute();
+        return $requete->fetchAll();
+    }
+
+   
 }
